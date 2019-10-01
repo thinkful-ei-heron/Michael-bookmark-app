@@ -9,9 +9,22 @@
 </head>
 <body>
   <header><h1>My Bookmarks</h1></header>
-  <section class="top"><button class="new" type="button" >+ New</button> <button class="filter" type="button">Filter By</button><!--maybe a dropdown--></section>
+  <section class="controls"><button class="new" type="button" >+ New</button> <button class="filter" type="button">Filter By</button><!--maybe a dropdown--></section>
   <main>
-    <div class="bookmark" id="7ddr"><span class="title">Title 11</span> <span class="rating">&starf;&starf;&starf;&starf;&starf;</span></div>
+    <div class="bookmark expand" id="7ddr">
+      <div class="expand top">
+        <span class="title">Title 11</span> <span class="del">del</span>
+      </div>
+      <div class="expand body">
+        <div class="expand body head">
+          <a href="https://www.lipsum.com/" class="visit">Visit Site</a><span class="rating expand">5</span>
+        </div>
+        <p class="expand body text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+
+
+
     <div class="bookmark" id="gjrz"><span class="title">Title 10</span> <span class="rating">&starf;&starf;&starf;&star;&star;</span></div>
     <div class="bookmark" id="zwd5"><span class="title">Title 9</span> <span class="rating">&starf;&starf;&starf;&starf;&star;</span></div>
     <div class="bookmark" id="to8k"><span class="title">Title 8</span> <span class="rating">&starf;&starf;&star;&star;&star;</span></div>
