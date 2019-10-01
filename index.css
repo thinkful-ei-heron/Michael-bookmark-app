@@ -1,3 +1,50 @@
 * {
+  border: 1px solid grey;
+}
+
+input, label {
+  display: block;
+}
+
+.error {
   border: 1px red solid;
+  background: 1px #ff7e7e solid;
+}
+
+/* following adapted from https://css-tricks.com/star-ratings/ and https://stackoverflow.com/questions/32395594/css-star-rating-w-radio-buttons/32397849#32397849 */
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.rating > input[type="radio"] {
+  display: none;
+}
+
+.rating > label {
+  display: inline-block;
+  position: relative;
+  color: gold;
+}
+
+.rating > input[type="radio"]:checked~label:before
+{
+   content: "\2605";
+   display: inline-block;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+.rating:hover > input[type="radio"]:checked~label:before{
+  color: grey;
+}
+
+.rating:hover > label:hover:after,
+.rating:hover > label:hover ~ label:after{
+   content: "\2605";
+   position: absolute;
+   top: 0;
+   left: 0;
 }

@@ -9,7 +9,13 @@
 </head>
 <body>
   <header><h1>My Bookmarks</h1></header>
-  <section class="top"><button class="new" type="button" >+ New</button> <button class="filter" type="button">Filter By</button><!--maybe a dropdown--></section>
+  <section class="top"><a class="new" href="./add.html">+ New</a> Filter By Rating <select class="filter">
+    <option value="1">&starf;</option>
+    <option value="2">&starf;&starf;</option>
+    <option value="3">&starf;&starf;&starf;</option>
+    <option value="4">&starf;&starf;&starf;&starf;</option>
+    <option value="5">&starf;&starf;&starf;&starf;&starf;</option>
+  </select><!--maybe a dropdown--></section>
   <main>
     <div class="bookmark" id="7ddr"><a href="./expand.html"><span class="title">Title 11</span> <span class="rating">&starf;&starf;&starf;&starf;&starf;</span></a>></div>
     <div class="bookmark" id="gjrz"><span class="title">Title 10</span> <span class="rating">&starf;&starf;&starf;&star;&star;</span></div>
@@ -41,7 +47,7 @@
       url: 'http://www.title2.com',
       description: 'dolorum tempore deserunt',
       expanded: false
-    } 
+    }
     ...
   ],
   adding: false,

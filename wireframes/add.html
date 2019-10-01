@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Bookmarks</title>
+  <link rel="stylesheet" type="text/css" href="../index.css">
+</head>
+
+<body>
+  <header><h1>My Bookmarks</h1></header>
+  <main>
+    <form name="add-bookmark" id="add">
+      <div class="url-section add">
+        <label for="url">Add new bookmark:</label>
+        <input type="url" name="url" id="bm-url" placeholder="https://google.com" required>
+      </div>
+      <div class="main-section add">
+        <div class="title add">
+          <label for="title">Link title: </label>
+          <input type="text" placeholder="A Short Title" name="title" id="bm-title" required>
+        </div>
+        <div class="rating add">
+          <!--user should be able to select a star to fill that star and any stars to the left, and clear any stars to the right-->
+          <!--CSS lets us do this nicely on hover but requires reversing the display-->
+          <!--everything in .rating is RTL, JS must account for this-->
+          <!--&#x2606; is empty star, &#x2605; is full-->
+          <input type="radio" id="rate-5" name="rating-1" value="5" required>
+          <label for="rate-5">&#x2606;</label>
+          <input type="radio" id="rate-4" name="rating-1" value="4">
+          <label for="rate-4">&#x2606;</label>
+          <input type="radio" id="rate-3" name="rating-1" value="3">
+          <label for="rate-3">&#x2606;</label>
+          <input type="radio" id="rate-2" name="rating-1" value="2">
+          <label for="rate-2">&#x2606;</label>
+          <input type="radio" id="rate-1" name="rating-1" value="1">
+          <label for="rate-1">&#x2606;</label>
+        </div>
+        <div class="description add">
+          <label for="desc">Description (optional):</label>
+          <textarea name="desc" id="desc"
+          placeholder="A longer description of the site you are bookmarking, if you wish to include one.">
+          </textarea>
+        </div>
+      </div>
+      <div class="control add">
+        <a href="./index.html">Cancel</a> <a href="./adderror.html">Create</a>
+      </div>
+    </form>
+  </main>
+  <!--
+const store = {
+  bookmarks: [...],
+  adding: true,
+  error: null,
+  filter: 0
+};
+-->
+</body>
+</html>
