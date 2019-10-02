@@ -1,5 +1,15 @@
 * {
-  border: 1px solid grey;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #82A382 ;
 }
 
 input, label {
@@ -11,24 +21,143 @@ input, label {
   background: 1px #ff7e7e solid;
 }
 
-/* following adapted from https://css-tricks.com/star-ratings/ and https://stackoverflow.com/questions/32395594/css-star-rating-w-radio-buttons/32397849#32397849 */
+main {
+  width: 100%;
+  border: 1px solid grey;
+  min-height: 80vh;
+  margin: 15px 0;
+}
+
+button.bookmark {
+  width: 100%;
+  display: flex;
+  border: 0;
+  background-color: white;
+}
+main > button:first-child {
+  border-top: none;
+}
+button.bookmark:nth-of-type(odd){
+  background-color:#CEFDFF;
+}
+button.bookmark:nth-of-type(even){
+  background-color: #96B9BA;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  justify-content: space-evenly;
+  padding: 10px 0;
+}
+
+header {
+  text-align: center;
+}
+h1 {
+  margin: 20px auto 10px auto;
+}
 
 .rating {
+  width: fit-content;
+  margin-left: auto;
+  flex-grow: 0;
+}
+.title.bookmark.expand {
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+}
+
+button.bookmark.expand {
+  background-color: #818AA3;
+}
+
+.container.bookmark.expand,
+.container.bookmark.expand > .header{
+  /*background-color: #D5B9B2;*/
+  background-color: #BFB5AF;
+}
+
+
+button.title.bookmark.expand{
+  color
+}
+
+a.visit {
+  display: inline-block;
+  padding: .5em;
+  width: 10em;
+  border: 2px solid grey;
+  text-align: center;
+  margin: .5em auto;
+  color: white;
+  background-color: black;
+  text-decoration: none;
+}
+
+.expand.body{
+  max-height: 40vh;
+}
+
+p.expand.body{
+ overflow: auto;
+ margin: 0;
+ padding: 1em 0;
+}
+
+.expand.top, .expand.header{
+  display: flex;
+  flex-direction: row;
+  background-color: lightgrey;
+}
+.expand.header {
+  background-color: white;
+}
+
+.del {
+  width: fit-content;
+  flex-grow: 0;
+  background-color: darkgrey;
+  border: 1px solid grey;
+}
+
+#desc {
+  width: 90%;
+  height: 40vh;
+  min-height: 150px;
+  overflow: auto;
+  margin-left: 15px;
+  margin-right: auto
+}
+
+
+
+/* Rating add/edit styling: following adapted from https://css-tricks.com/star-ratings/ and https://stackoverflow.com/questions/32395594/css-star-rating-w-radio-buttons/32397849#32397849 */
+
+.rating.add {
   unicode-bidi: bidi-override;
   direction: rtl;
+  text-align: center;
+  width: fit-content;
+  margin: auto auto;
+  font-size: 200%;
 }
 
-.rating > input[type="radio"] {
-  display: none;
+.rating.add > input[type="radio"] {
+ /* display: none; <-- breaks keyboard nav*/
+  opacity: 0;
+  position:absolute;
 }
 
-.rating > label {
+.rating.add > label {
   display: inline-block;
   position: relative;
   color: gold;
 }
 
-.rating > input[type="radio"]:checked~label:before
+.rating.add > input[type="radio"]:checked ~ label:before
 {
    content: "\2605";
    display: inline-block;
@@ -37,14 +166,16 @@ input, label {
    left: 0;
 }
 
-.rating:hover > input[type="radio"]:checked~label:before{
+.rating.add:hover > input[type="radio"]:checked ~ label:before{
   color: grey;
 }
 
-.rating:hover > label:hover:after,
-.rating:hover > label:hover ~ label:after{
+.rating.add:hover > label:hover:after,
+.rating.add:hover > label:hover ~ label:after{
    content: "\2605";
    position: absolute;
    top: 0;
    left: 0;
 }
+
+/* end rating add/edit star styling */

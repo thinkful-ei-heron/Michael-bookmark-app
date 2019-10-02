@@ -9,22 +9,34 @@
 </head>
 <body>
   <header><h1>My Bookmarks</h1></header>
-  <section class="controls"><button class="new" type="button" >+ New</button> <button class="filter" type="button">Filter By</button><!--maybe a dropdown--></section>
+  <section class="controls">
+      <button class="new" type="button">+ New</button>
+      <select class="filter">
+        <option value="" selected>Filter By</option>
+        <option value="1">&starf;</option>
+        <option value="2">&starf;&starf;</option>
+        <option value="3">&starf;&starf;&starf;</option>
+        <option value="4">&starf;&starf;&starf;&starf;</option>
+        <option value="5">&starf;&starf;&starf;&starf;&starf;</option>
+      </select>
+    </section>
   <main>
     <div class="bookmark expand" id="7ddr">
       <div class="expand top">
-        <a class="title" href="./index.html">Title 11</a> <span class="del">del</span>
+          <button type="button" class="bookmark title expand" id="7ddr"><a href="./index.html">Title 11</a></button> <button type="button" class="del">del</button>
+
+      </div>
+      <div class="expand header">
+          <a href="https://www.lipsum.com/" class="visit">Visit Site</a><button type="button" class="rating expand">5</button>
       </div>
       <div class="expand body">
-        <div class="expand body head">
-          <a href="https://www.lipsum.com/" class="visit">Visit Site</a><span class="rating expand">5</span>
-        </div>
+
         <p class="expand body text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
     </div>
 
 
-
+    <!--needs to be buttons, but that'll come automatically-->
     <div class="bookmark" id="gjrz"><span class="title">Title 10</span> <span class="rating">&starf;&starf;&starf;&star;&star;</span></div>
     <div class="bookmark" id="zwd5"><span class="title">Title 9</span> <span class="rating">&starf;&starf;&starf;&starf;&star;</span></div>
     <div class="bookmark" id="to8k"><span class="title">Title 8</span> <span class="rating">&starf;&starf;&star;&star;&star;</span></div>
