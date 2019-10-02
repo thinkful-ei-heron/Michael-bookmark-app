@@ -71,9 +71,10 @@ const buildMainScreen = function() {
 
       </div>
       <div class="expand header">
-          <a href="${bm.url}" class="visit">Visit Site</a>
-          <button type="button" class="${store.editing ? 'hidden' : 'edit'}" id="edit-${bm.id}">edit</button>
-          <span class="rating expand">${bm.rating}</span>
+        <button type="button" class="${store.editing ? 'hidden' : 'edit'}" id="edit-${bm.id}">edit</button>
+        <a href="${bm.url}" class="visit">Visit Site</a>
+        <span class="rating expand fa-stack fa-2x"><span class="fas fa-stack-2x fa-star"></span><span class="fa-stack-1x">${bm.rating}</span></span>
+
       </div>`);
       if(bm.desc){
         html = html.concat(`<div class="expand body">
@@ -116,7 +117,7 @@ const buildMainScreen = function() {
     </div>
       `);
     } else {
-      html = html.concat(`<button type="button" class="bookmark" id="${bm.id}"><span class="title">${bm.title}</span> <span class="rating">${ratingString}</span></button>`);
+      html = html.concat(`<button type="button" class="bookmark" id="${bm.id}"><span class="title">${bm.title}</span> <span class="rating collapsed">${ratingString}</span></button>`);
     }
   });
   return html;
@@ -261,20 +262,19 @@ const handleSaveClick = function() {
       Object.assign(updateObj, {desc});
     }
     if(updateObj.desc === '') {
-      Object.assign(updateObj, {desc: null}) //API will reject an empty string
+      Object.assign(updateObj, {desc: null}); //API will reject an empty string
     }
     if(!$.isEmptyObject(updateObj))
     {
       api.updateBookmark(id, updateObj)
         .then( () => {
-          Object.assign(updateObj, {editing: false})
+          Object.assign(updateObj, {editing: false});
           store.findAndUpdate(id, updateObj);
           store.setEditing(false);
           render();
         })
         .catch(err => {
           store.setError(err);
-          console.dir(err);
           render();
         });
     } else {
