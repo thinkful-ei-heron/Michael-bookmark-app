@@ -35,6 +35,7 @@ main {
   min-height: 80vh;
   margin: 15px auto;
   text-align: center;
+/*background-color: #82A382 ; /*if there's time to think about a nice background for the page itself*/
 }
 
 
@@ -45,6 +46,7 @@ button.bookmark {
   background-color: white;
   background-color: #CEFDFF;
   border: 1px solid #82A382;
+  padding-left: 1em;
 }
 main > button:first-child {
   border-top: none;
@@ -83,13 +85,12 @@ h1 {
 .title.bookmark.expand {
   flex-grow: 1;
   margin: 0;
-  padding: 0;
+
 }
 
 button.title.bookmark.expand {
   background-color: #818AA3;
   border: none;
-  padding-left: 6px;
 }
 
 .container.bookmark.expand,
@@ -122,8 +123,9 @@ a.visit {
 
 p.expand.body{
  overflow: auto;
- margin: 0;
- padding: 1em 0;
+ margin: 1em;
+ border: 1px inset #818AA3;
+ border-style: inset;
 }
 
 .expand.top, .expand.header{
@@ -131,10 +133,11 @@ p.expand.body{
   flex-direction: row;
   background-color: lightgrey;
   justify-content: space-between;
+  align-content: center;
 }
-.expand.header {
+/* .expand.header {
   border-bottom: 1px solid #818AA3;
-}
+} */
 
 .del {
   width: fit-content;
@@ -142,7 +145,7 @@ p.expand.body{
   background-color: darkgrey;
   border: none;
 }
-.edit {
+button.edit, button.save {
   background-color: darkgrey;
   flex-grow: 0;
   border: none;
@@ -166,6 +169,10 @@ p.expand.body{
 .fa-star {
   color: gold;
 }
+.fa-stack-2x.fa-star {
+  top: -1px;
+  left: -2px;
+}
 .fa-stack-2x, .fa-stack-1x {
   transform: scale(.65);
 }
@@ -176,8 +183,8 @@ p.expand.body{
 /* allow clicking through the star rating on the bookmark list */
 .rating.collapsed {
   pointer-events: none;
+  margin-right: .5em;
 }
-
 
 
 
@@ -192,7 +199,7 @@ p.expand.body{
   font-size: 200%;
 }
 
-.rating.add > input[type="radio"] {
+.rating.add > input[type="radio"], .visual-hide {
  /* display: none; <-- breaks keyboard nav*/
   opacity: 0;
   position:absolute;
@@ -229,6 +236,12 @@ p.expand.body{
 
 /* for larger screeens */
 
+@media screen and (max-width: 700px) {
+  main.bm-list {
+    max-width: 600px;
+  }
+}
+
 @media screen and (min-width: 800px) {
  .title.add, .url-section.add, .title.add > *, .url-section.add > * {
    display: inline-block;
@@ -238,8 +251,64 @@ p.expand.body{
  }
 }
 
+@media screen and (min-width: 700px) {
+  main.bm-list{
+    width: 600px;
+  }
+}
+@media screen and (min-height: 800px){
+  /* add some breathing room on tall screens */
+  main.bm-list > button,
+  main.bm-list > .container {
+    margin: 2px 0;
+  }
+  main.bm-list > button {
+    padding: 6px inherit;
+  }
+  main.bm-list > .container {
+    padding-top: 0;
+  }
+  .title.bookmark.expand, .del {
+    padding: 3px inherit;
+  }
+}
 
+/*get some columns for wide screens*/
+
+@media screen and (min-width: 1200px) {
+  main.bm-list{
+    width: 90vw;
+    max-width: 1200px;
+    column-width: 500;
+    column-count: 2;
+  }
+}
+
+/* really wide screens can have more*/
+
+@media screen and (min-width: 3000px) {
+  main.bm-list{
+    max-width: 2200px;
+    column-count: 4;
+  }
+}
+
+
+/* keyboard a11y */
+:focus {
+  outline-width: 3px;
+}
+
+.label:focus  :focus {
+  outline: blue solid 3px;
+}
+
+
+/*
 main.bm-list{
   column-width: 300px;
-
+  column-count: 2;
+  height: 80vh;
+  column-fill: auto;
 }
+*/

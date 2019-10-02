@@ -63,59 +63,61 @@ const buildMainScreen = function() {
       ratingString = ratingString.concat('&star;');
     }
 
-    if(bm.expanded  && !bm.editing){
-      html = html.concat(`<div class="bookmark expand container">
-      <div class="expand top">
-          <button type="button" class="title bookmark expand" id="${bm.id}">${bm.title}</button>
-          <button type="button" class="del" id="del-${bm.id}">del</button>
+    if(bm.expanded){
+      if(bm.editing) {
+        html = html.concat(`<div class="bookmark expand container">
+        <div class="expand top">
+            <button type="button" class="title bookmark expand" id="${bm.id}">${bm.title}</button>
+            <button type="button" class="del" id="del-${bm.id}">delete</button>
 
+        </div>
+        <div class="expand header">
+
+            <button type="button" class="save" id="save-${bm.id}">save</button>
+            <div class="rating add edit">
+            <input type="radio" id="rate-5" name="rating" value="5"
+            ${5 === bm.rating ? 'checked' : ''} required>
+            <label for="rate-5">&#x2606;</label>
+            <input type="radio" id="rate-4" name="rating" value="4"
+            ${4 === bm.rating ? 'checked' : ''}>
+            <label for="rate-4">&#x2606;</label>
+            <input type="radio" id="rate-3" name="rating" value="3"
+            ${3 === bm.rating ? 'checked' : ''}>
+            <label for="rate-3">&#x2606;</label>
+            <input type="radio" id="rate-2" name="rating" value="2"
+            ${2 === bm.rating ? 'checked' : ''}>
+            <label for="rate-2">&#x2606;</label>
+            <input type="radio" id="rate-1" name="rating" value="1"
+            ${1 === bm.rating ? 'checked' : ''}>
+            <label for="rate-1">&#x2606;</label>
+          </div>
+        </div>
+
+        <div class="description add edit">
+        <label for="desc">Description (optional):</label>
+        <textarea name="desc" id="desc"
+        placeholder="A longer description of the site you are bookmarking, if you wish to include one.">${bm.desc ? bm.desc : ''}</textarea>
       </div>
-      <div class="expand header">
-        <button type="button" class="${store.editing ? 'hidden' : 'edit'}" id="edit-${bm.id}">edit</button>
-        <a href="${bm.url}" class="visit">Visit Site</a>
-        <span class="rating expand fa-stack fa-2x"><span class="fas fa-stack-2x fa-star"></span><span class="fa-stack-1x">${bm.rating}</span></span>
+        `);
+      } else {
+        html = html.concat(`<div class="bookmark expand container">
+        <div class="expand top">
+            <button type="button" class="title bookmark expand" id="${bm.id}">${bm.title}</button>
+            <button type="button" class="del" id="del-${bm.id}">delete</button>
 
-      </div>`);
-      if(bm.desc){
-        html = html.concat(`<div class="expand body">
-        <p class="expand body text">${bm.desc}</p>
-      </div>`);
-      }
-      html = html.concat('</div>');
-    }  else if (bm.editing) {
-      html = html.concat(`<div class="bookmark expand container">
-      <div class="expand top">
-          <button type="button" class="title bookmark expand" id="${bm.id}">${bm.title}</button>
-          <button type="button" class="del" id="del-${bm.id}">del</button>
-
-      </div>
-      <div class="expand header">
+        </div>
+        <div class="expand header">
+          <button type="button" class="${store.editing ? 'hidden' : 'edit'}" id="edit-${bm.id}">edit</button>
           <a href="${bm.url}" class="visit">Visit Site</a>
-          <button type="button" class="save" id="save-${bm.id}">Save</button>
-      </div>
-      <div class="rating add edit">
-        <input type="radio" id="rate-5" name="rating" value="5"
-        ${5 === bm.rating ? 'checked' : ''} required>
-        <label for="rate-5">&#x2606;</label>
-        <input type="radio" id="rate-4" name="rating" value="4"
-        ${4 === bm.rating ? 'checked' : ''}>
-        <label for="rate-4">&#x2606;</label>
-        <input type="radio" id="rate-3" name="rating" value="3"
-        ${3 === bm.rating ? 'checked' : ''}>
-        <label for="rate-3">&#x2606;</label>
-        <input type="radio" id="rate-2" name="rating" value="2"
-        ${2 === bm.rating ? 'checked' : ''}>
-        <label for="rate-2">&#x2606;</label>
-        <input type="radio" id="rate-1" name="rating" value="1"
-        ${1 === bm.rating ? 'checked' : ''}>
-        <label for="rate-1">&#x2606;</label>
-      </div>
-      <div class="description add edit">
-      <label for="desc">Description (optional):</label>
-      <textarea name="desc" id="desc"
-      placeholder="A longer description of the site you are bookmarking, if you wish to include one.">${bm.desc ? bm.desc : ''}</textarea>
-    </div>
-      `);
+          <span class="rating expand fa-stack fa-2x"><span class="fas fa-stack-2x fa-star"></span><span class="fa-stack-1x">${bm.rating}</span></span>
+        </div>`);
+        if(bm.desc){
+          html = html.concat(`<div class="expand body">
+          <p class="expand body text">${bm.desc}</p>
+        </div>`);
+        }
+        html = html.concat('</div>');
+      }
     } else {
       html = html.concat(`<button type="button" class="bookmark" id="${bm.id}"><span class="title">${bm.title}</span> <span class="rating collapsed">${ratingString}</span></button>`);
     }
@@ -205,7 +207,7 @@ const handleBookmarkClick = function() {
   $('main').on('click', 'button.bookmark', event => {
     const id = event.target.id;
     store.toggleExpanded(id);
-    render();
+    render(id);
   });
 };
 
@@ -237,6 +239,7 @@ const handleFilter = function() {
 const handleEditClick = function() {
   $('main').on('click', 'button.edit', event => {
     let id = event.target.id.slice(5); //avoid "edit-", just get ID
+    console.log(id);
     if (!store.editing){
       const bm = store.findById(id);
       bm.editing = true;
