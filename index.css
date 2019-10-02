@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .hidden {
@@ -16,6 +17,13 @@ input, label {
   display: block;
 }
 
+input {
+  min-width: 15em;
+  max-width: 80%; /* todo: is there a way to expand with the input within limits? */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .error {
   border: 1px red solid;
   background: 1px #ff7e7e solid;
@@ -23,10 +31,11 @@ input, label {
 
 main {
   width: 100%;
-  border: 1px solid grey;
   min-height: 80vh;
   margin: 15px 0;
+  text-align: center;
 }
+
 
 button.bookmark {
   width: 100%;
@@ -80,6 +89,10 @@ button.bookmark.expand {
   background-color: #BFB5AF;
 }
 
+.container.bookmark.expand {
+  break-inside: avoid;
+}
+
 
 button.title.bookmark.expand{
   color
@@ -128,8 +141,10 @@ p.expand.body{
   height: 40vh;
   min-height: 150px;
   overflow: auto;
-  margin-left: 15px;
-  margin-right: auto
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80em;
+
 }
 
 
@@ -179,3 +194,21 @@ p.expand.body{
 }
 
 /* end rating add/edit star styling */
+
+/* for larger screeens */
+
+@media screen and (min-width: 800px) {
+ .title.add, .url-section.add, .title.add > *, .url-section.add > * {
+   display: inline-block;
+ }
+ .title.add, .url-section.add {
+   margin: auto 10px;
+ }
+}
+
+
+main.bm-list{
+  column-width: 300px;
+  min-height: 80vh;
+  column-fill: auto;
+}

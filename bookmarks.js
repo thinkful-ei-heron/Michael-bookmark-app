@@ -130,9 +130,11 @@ const render = function() {
   if(store.adding){
     html = buildAddingScreen();
     $('.controls').hide();
+    $('main').removeClass('bm-list');
   } else {
     html = buildMainScreen();
     $('.controls').show();
+    $('main').addClass('bm-list');
   }
   $('main').html(html);
 };
@@ -259,7 +261,7 @@ const handleSaveClick = function() {
       Object.assign(updateObj, {desc});
     }
     if(updateObj.desc === '') {
-      Object.assign(updateObj, {desc: null})
+      Object.assign(updateObj, {desc: null}) //API will reject an empty string
     }
     if(!$.isEmptyObject(updateObj))
     {
