@@ -16,7 +16,8 @@ let adding = false;
 let filter = 0;
 
 const findById = function (id) {
-  return this.bookmarks.find(cur => cur.id === id);
+  const result = this.bookmarks.find(cur => cur.id === id);
+  return result;
 };
 
 const setFilter = function(filterLevel) {
@@ -42,12 +43,12 @@ const findAndDelete = function(id) {
 };
 
 const findAndUpdate = function(id, newData) {
-  const bookmark = findById(id);
+  const bookmark = this.findById(id);
   Object.assign(bookmark, newData);
 };
 
 const toggleExpanded = function(id) {
-  const bookmark = this.bookmarks.find(cur => cur.id === id);
+  const bookmark = this.findById(id);
   bookmark.expanded = !bookmark.expanded;
 };
 

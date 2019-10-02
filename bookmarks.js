@@ -6,6 +6,7 @@ const buildAddingScreen = function() {
   const url = $('#bm-url').val();
   const title = $('#bm-title').val();
   const desc = $('#desc').val();
+
   //I would like to persist rating but not sure how
   //it's the least annoying to redo so it can be a stretch goal
   //we're going to rely on undefined being falsy for the ternary operator:
@@ -93,19 +94,19 @@ const buildMainScreen = function() {
       </div>
       <div class="rating add edit">
         <input type="radio" id="rate-5" name="rating" value="5"
-        ${5 === bm.rating ? 'checked="checked"' : ''} required>
+        ${5 === bm.rating ? 'checked' : ''} required>
         <label for="rate-5">&#x2606;</label>
         <input type="radio" id="rate-4" name="rating" value="4"
-        ${4 === bm.rating ? 'checked="checked"' : ''}>
+        ${4 === bm.rating ? 'checked' : ''}>
         <label for="rate-4">&#x2606;</label>
         <input type="radio" id="rate-3" name="rating" value="3"
-        ${3 === bm.rating ? 'checked="checked"' : ''}>
+        ${3 === bm.rating ? 'checked' : ''}>
         <label for="rate-3">&#x2606;</label>
         <input type="radio" id="rate-2" name="rating" value="2"
-        ${2 === bm.rating ? 'checked="checked"' : ''}>
+        ${2 === bm.rating ? 'checked' : ''}>
         <label for="rate-2">&#x2606;</label>
         <input type="radio" id="rate-1" name="rating" value="1"
-        ${1 === bm.rating ? 'checked="checked"' : ''}>
+        ${1 === bm.rating ? 'checked' : ''}>
         <label for="rate-1">&#x2606;</label>
       </div>
       <div class="description add edit">
@@ -247,21 +248,38 @@ const handleEditClick = function() {
 const handleSaveClick = function() {
   $('main').on('click', 'button.save', event => {
     let id = event.target.id.slice(5);
-    let rating = $('input[name="rating"]:checked').val();
+    let rating = Number.parseInt($('input[name="rating"]:checked').val());
     let desc = $('#desc').val();
-    let updateObj = {rating};
-    if(desc.length > 0){
+    let updateObj = {};
+    let bm = store.findById(id);
+    if (rating !== bm.rating){
+      Object.assign(updateObj, {rating});
+    }
+    if(desc !== bm.desc){
       Object.assign(updateObj, {desc});
     }
-    api.updateBookmark(id, updateObj)
-      .then( () => {
-        store.findAndUpdate(id, updateObj);
-        render();
-      })
-      .catch(err => {
-        store.setError(err);
-        render();
-      });
+    if(updateObj.desc === '') {
+      Object.assign(updateObj, {desc: null})
+    }
+    if(!$.isEmptyObject(updateObj))
+    {
+      api.updateBookmark(id, updateObj)
+        .then( () => {
+          Object.assign(updateObj, {editing: false})
+          store.findAndUpdate(id, updateObj);
+          store.setEditing(false);
+          render();
+        })
+        .catch(err => {
+          store.setError(err);
+          console.dir(err);
+          render();
+        });
+    } else {
+      store.findAndUpdate(id, {editing: false});
+      store.setEditing(false);
+      render();
+    }
   });
 };
 

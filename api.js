@@ -37,6 +37,7 @@ const addBookmark = function(bookmarkObj) {
 
 const updateBookmark = function (id, updateObj) {
   const update =JSON.stringify(updateObj);
+  console.log(update);
   return fetchWrapper(`${BASE_URL}/${id}`, {
     method: 'PATCH',
     headers: ctypeHeader,
